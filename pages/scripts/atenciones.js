@@ -236,9 +236,9 @@ function ver(idmovimiento) {
             $("#telprof").text(data[0]["telefono_prof"]);
             $("#corrElect").text(data[0]["correo_prof"]);
             $("#fecder").text(data[0]["fecha_derivacion"]);
-            $("#famConDer").text(data[0]["familia_con"]);
+            //$("#famConDer").text(data[0]["familia_con"]);
             $("#uniEjec").text(data[0]["unidad_ejecutora"]);
-            $("#jefEst").text(data[0]["jefe_es"]);
+            $("#jefEst").text(data[0]["unidad"]);
             $("#depart").text(data[0]["departamento"]);
             $("#Provin").text(data[0]["provincia"]);
             $("#distr").text(data[0]["distrito"]);
@@ -257,6 +257,7 @@ function ver(idmovimiento) {
             $("#domdnideriv").text(data[0]["domicilio_dni_us"]);
             $("#domacderiv").text(data[0]["domicilio_actual_us"]);
             $("#telderiv").text(data[0]["telefono_us"]);
+            $("#dnideriv").text(data[0]["dni_us"]);
             $("#apnomtut").text(data[0]["ap_nom_tu"]);
             $("#dnitut").text(data[0]["dni_tu"]);
             $("#fecnactut").text(data[0]["fecha_nac_tu"]);
@@ -272,15 +273,9 @@ function ver(idmovimiento) {
             $("#celtut").text(data[0]["celular_tu"]);
             $("#vicagre").text(data[0]["vic_agre"]);
             $("#tipvulder").text(data[0]["tipo_vul_der"]);
-            $("#malinf").text(data[0]["maltrato_infantil"]);
-            $("#malfis").text(data[0]["maltrato_fisico"]);
-            $("#deseresc").text(data[0]["desercion_escolar"]);
-            $("#acosesc").text(data[0]["acoso_escolar"]);
-            $("#violsex").text(data[0]["violencia_sexual"]);
-            $("#violfami").text(data[0]["violencia_familiar"]);
-            $("#violgene").text(data[0]["violencia_genero"]);
-            $("#abandesa").text(data[0]["abandono_desamparo"]);
-            $("#consalcdro").text(data[0]["consumo"]);
+            $("#violenciado").text(data[0]["violencia_sexual"]);
+            $("#abandordesamp").text(data[0]["abandono_desamparo"]);
+            $("#alcoholordrogas").text(data[0]["consumo"]);
             $("#otrodesc").text(data[0]["otro_desc"]);
             $("#motder").text(data[0]["motivo_der"]);
             $("#datrelecon").text(data[0]["datos_relevantes"]);
@@ -307,6 +302,12 @@ function ver(idmovimiento) {
                 $("#contetuto7").show();
                 $("#contentinfi").show();
                 $("#contentdeseres").show();
+            }
+
+            if(data[0]["otro_desc"].length > 1) {
+                $("#otrotipvl").show();
+            }else{
+                $("#otrotipvl").hide();
             }
         }
     );

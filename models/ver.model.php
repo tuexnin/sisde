@@ -6,14 +6,13 @@ class VerModel{
 
     static public function ver($idmovimiento){
         $sql = "SELECT r.idregistro, 
-        r.nombre_prof, 
-        r.cargo_prof,
-        r.telefono_prof,
-        r.correo_prof,
+        CONCAT(u.nombres, ' ', u.apellidos) as nombre_prof, 
+        u.cargo as cargo_prof,
+        u.celular as telefono_prof,
+        u.correo as correo_prof,
         r.fecha_derivacion,
-        r.familia_con,
-        r.unidad_ejecutora,
-        r.jefe_es,
+        e.institucion as unidad_ejecutora,
+        e.unidad,
         r.ue_derivar,
         r.ap_nom_us,
         r.fecha_nas_us,
@@ -40,18 +39,13 @@ class VerModel{
         r.celular_tu,
         r.vic_agre,
         r.tipo_vul_der,
-        r.maltrato_infantil,
-        r.maltrato_fisico,
-        r.desercion_escolar,
-        r.acoso_escolar,
         r.violencia_sexual,
-        r.violencia_familiar,
-        r.violencia_genero,
         r.abandono_desamparo,
         r.consumo,
         r.otro_desc,
         r.motivo_der,
         r.datos_relevantes,
+        r.dni_us,
         e.entidad,
         e.ruc,
         e.direccion,
@@ -64,6 +58,7 @@ class VerModel{
         FROM movimientos m 
         INNER JOIN registros r ON m.idregistro = r.idregistro
         INNER JOIN entidad e ON r.identidad = e.identidad
+        INNER JOIN usuario u ON r.idusuario = u.idusuario
         INNER JOIN ubigeo_peru_districts upd ON e.iddistrito = upd.id
         INNER JOIN ubigeo_peru_provinces upp ON upd.province_id = upp.id
         INNER JOIN ubigeo_peru_departments upd2 ON upp.department_id = upd2.id

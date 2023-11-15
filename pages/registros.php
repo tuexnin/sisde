@@ -22,7 +22,6 @@
                         <thead>
                             <tr>
                                 <th class="" style="width: 10%;">Opciones</th>
-                                <th>Unidad Ejecutora</th>
                                 <th class="">Fecha Derivacion</th>
                                 <th class="">Apellidos y nombres del derivado</th>
                                 <th class="" style="width: 5%;">Documentos</th>
@@ -68,185 +67,46 @@
 
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#step-3">
-                                    <span class="num">3</span>
-
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="#step-4">
-                                    <span class="num">4</span>
-
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="#step-5">
-                                    <span class="num">5</span>
-
-                                </a>
-                            </li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
                                 <div class="form-group row justify-content-center">
-                                    <div class="col-md-6">
-                                        <h6>IDENTIFICACION DE LA ENTIDAD QUE DERIVA EL CASO</h6>
+                                    <div class="col-md-5">
+                                        <h6>IDENTIFICACION DEL DERIVADO</h6>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-3">
                                         <div class="form-material">
                                             <input type="hidden" id="txtIdregistro" name="txtIdregistro">
                                             <input type="hidden" id="txtidusuario" name="txtidusuario">
                                             <input type="hidden" id="txtidentidad" name="txtidentidad">
-                                            <input type="text" class="form-control" id="txtNombreProf" name="txtNombreProf" placeholder="Ingrese sus datos" require>
-                                            <label for="txtNombreProf">Profesional</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtCargoProf" name="txtCargoProf" placeholder="Ingrese el cargo">
-                                            <label for="txtCargoProf">Cargo y/o Profesion</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtTelefonoProf" name="txtTelefonoProf" placeholder="Ingrese el telefono">
-                                            <label for="txtTelefonoProf">Telefono</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="email" class="form-control" id="txtCorreoProf" name="txtCorreoProf" placeholder="Ingrese su correo">
-                                            <label for="txtCorreoProf">Correo</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-material">
+                                            <input type="hidden" id="txtimpresionnene" name="txtimpresionnene">
                                             <input type="text" class="js-datepicker form-control" id="txtFecDerivacion" name="txtFecDerivacion" data-provide="datepicker" data-date-format="dd-mm-yyyy">
                                             <label for="txtFecDerivacion">Fecha de Derivacion</label>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-material">
-                                            <input type="text" class="form-control" id="txtFamiliaCon" name="txtFamiliaCon" placeholder="Ingrese el nombre del familiar">
-                                            <label for="txtFamiliaCon">Familia en conocimiento</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
-                                <div class="form-group row justify-content-center">
-                                    <div class="col-md-6">
-                                        <h6>IDENTIFICACION DE LA INSTITUCION DERIVADORA</h6>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <select class="form-control" id="txtModulo" name="txtModulo" style="width: 100%;">
-                                                <option value='0'>SELECCIONE</option>
-                                                <option value='P'>MODULO DE PROTECCION</option>
-                                                <option value='SA'>MODULO DE SANCION PENAL</option>
-                                            </select>
-                                            <label for="txtModulo">Modulo</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <select class="form-control" id="txtUnidadEjec" name="txtUnidadEjec" style="width: 100%;">
-                                            </select>
-                                            <label for="txtUnidadEjec">Unidad ejecutora</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtJefeEst" name="txtJefeEst" placeholder="Ingrese el nombre del responsable">
-                                            <label for="txtJefeEst">Responsable de la Derivacion</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtDepartamento" name="txtDepartamento" readonly>
-                                            <label for="txtDepartamento">Departamento</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtProvincia" name="txtProvincia" readonly>
-                                            <label for="txProvincia">Provincia</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtDistrito" name="txtDistrito" readonly>
-                                            <label for="txtDistrito">Distrito</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtDireccionEst" name="txtDireccionEst" readonly>
-                                            <label for="txtDireccionEst">Dirección del establecimiento</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtTelefonoInst" name="txtTelefonoInst" readonly>
-                                            <label for="txtTelefonoInst">Teléfono fijo institucional</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtCelularEst" name="txtCelularEst" readonly>
-                                            <label for="txtCelularEst">Teléfono móvil del establecimiento</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtCorreoInst" name="txtCorreoInst" readonly>
-                                            <label for="txtCorreoInst">Correo electrónico</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
-                                <div class="form-group row justify-content-center">
-                                    <div class="col-md-6">
-                                        <h6>IDENTIFICACION DEL DERIVADO</h6>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-5">
-                                        <div class="form-material">
                                             <input type="text" class="form-control" id="txtAp_nom_us" name="txtAp_nom_us">
                                             <label for="txtAp_nom_us">Apellidos y nombres</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-material">
                                             <input type="text" class="form-control" id="txtDni_us" name="txtDni_us">
                                             <label for="txtDni_us">DNI</label>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group row">
                                     <div class="col-md-3">
                                         <div class="form-material">
                                             <input type="text" class="js-datepicker form-control" id="txtFecha_nas" name="txtFecha_nas" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                             <label for="txtFecha_nas">Fecha de Nacimiento</label>
                                         </div>
                                     </div>
-
-                                </div>
-                                <div class="form-group row">
                                     <div class="col-md-2">
                                         <div class="form-material">
                                             <input type="text" class="form-control" id="txtEdadUs" name="txtEdadUs" readonly>
@@ -485,7 +345,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+                            <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
                                 <div class="form-group row justify-content-center">
                                     <div class="col-md-6">
                                         <h6>DESCRIPCION DE LA VULNERACION DEL DERECHO</h6>
@@ -504,82 +364,62 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-material">
-                                            <input type="text" class="form-control" id="txtTipoVulDer" name="txtTipoVulDer">
-                                            <label for="txtTipoVulDer">Tipo de vulneración de derecho</label>
+                                            <select class="form-control" id="txtTipoVulDer" name="txtTipoVulDer" style="width: 100%;">
+                                                <option value='0'>SELECCIONE</option>
+                                                <option value='Maltrato Infantil'>Maltrato Infantil</option>
+                                                <option value='Maltrato Fisico'>Maltrato Fisico</option>
+                                                <option value='Desercion Escolar'>Desercion Escolar</option>
+                                                <option value='Acoso Escolar'>Acoso Escolar</option>
+                                            </select>
+                                            <label for="txtTipoVulDer">Maltrato</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-4" id="campo1">
+                                    <div class="col-md-4">
                                         <div class="form-material">
-                                            <input type="text" class="form-control" id="txtMaltratoInf" name="txtMaltratoInf">
-                                            <label for="txtMaltratoInf">Maltrato Infantil</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-4" id="campo2">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtTipMaltratoFisi" name="txtTipMaltratoFisi">
-                                            <label for="txtTipMaltratoFisi">Maltrato Fisico</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4" id="campo3">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtDesercionEsco" name="txtDesercionEsco">
-                                            <label for="txtDesercionEsco">Desercion Escolar</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4" id="campo4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtAcosoEsco" name="txtAcosoEsco">
-                                            <label for="txtAcosoEsco">Acoso Escolar</label>
+                                            <select class="form-control" id="txtViolenciaC" name="txtViolenciaC" style="width: 100%;">
+                                                <option value='0'>SELECCIONE</option>
+                                                <option value='Violencia Sexual'>Violencia Sexual</option>
+                                                <option value='Violencia Familiar'>Violencia Familiar</option>
+                                                <option value='Violencia de Genero'>Violencia de Genero</option>
+                                            </select>
+                                            <label for="txtViolenciaC">Violencia</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-4">
                                         <div class="form-material">
-                                            <input type="text" class="form-control" id="txtViolenciaSexu" name="txtViolenciaSexu">
-                                            <label for="txtViolenciaSexu">Violencia Sexual</label>
+                                            <select class="form-control" id="txtAbandoDesamp" name="txtAbandoDesamp" style="width: 100%;">
+                                                <option value='0'>SELECCIONE</option>
+                                                <option value='SI'>SI</option>
+                                                <option value='NO'>NO</option>
+                                            </select>
+                                            <label for="txtAbandoDesamp">Abandono y/o Desamparo</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-material">
-                                            <input type="text" class="form-control" id="txtViolenciaFami" name="txtViolenciaFami">
-                                            <label for="txtViolenciaFami">Violencia Familiar</label>
+                                            <select class="form-control" id="txtAlcohol" name="txtAlcohol" style="width: 100%;">
+                                                <option value='0'>SELECCIONE</option>
+                                                <option value='SI'>SI</option>
+                                                <option value='NO'>NO</option>
+                                            </select>
+                                            <label for="txtAlcohol">Consumo de alcohol y/o drogas</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtViolenciaGene" name="txtViolenciaGene">
-                                            <label for="txtViolenciaGene">Violencia de Genero</label>
-                                        </div>
+                                    <div class="col-md-4 d-flex align-items-center justify-content-center" id="otroTipViol">
+                                        <label class="css-control css-control-sm css-control-primary css-checkbox">
+                                            <input type="checkbox" class="css-control-input" id="chekito">
+                                            <span class="css-control-indicator"></span> Otro
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtAbandonoDesamp" name="txtAbandonoDesamp">
-                                            <label for="txtAbandonoDesamp">Abandono y/o Desamparo</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-material">
-                                            <input type="text" class="form-control" id="txtConsumo" name="txtConsumo">
-                                            <label for="txtConsumo">Consumo de alcohol y/o drogas</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-12" id="otritodesk">
                                         <div class="form-material">
                                             <input type="text" class="form-control" id="txtOtroDesc" name="txtOtroDesc">
                                             <label for="txtOtroDesc">Otro</label>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="step-5" class="tab-pane" role="tabpanel" aria-labelledby="step-5">
-                                <div class="form-group row justify-content-center">
-                                    <div class="col-md-6">
-                                        <h6>DESCRIPCION</h6>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -599,6 +439,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- Include optional progressbar HTML -->
@@ -749,14 +590,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Familia en conocimiento de la derivación</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="famConDer"></div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -776,7 +610,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Responsable de la Derivacion</label>
+                                <label class="col-12">Modulo</label>
                                 <div class="col-md-9">
                                     <div class="form-control-plaintext" id="jefEst"></div>
                                 </div>
@@ -1106,81 +940,27 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Tipo de vulneración de derecho</label>
+                                <label class="col-12">Tipo de Maltrato</label>
                                 <div class="col-md-9">
                                     <div class="form-control-plaintext" id="tipvulder"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="contentinfi">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Maltrato infantil</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="malinf"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Maltrato fisico</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="malfis"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="contentdeseres">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Deserción escolar</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="deseresc"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Acoso escolar</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="acosesc"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Violencia sexual</label>
+                                <label class="col-12">Tipo de Violencia</label>
                                 <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="violsex"></div>
+                                    <div class="form-control-plaintext" id="violenciado"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Violencia familiar</label>
+                                <label class="col-12">Abandono y/o Desamparo</label>
                                 <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="violfami"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Violencia de genero</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="violgene"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Abandono y/o desamparo</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="abandesa"></div>
+                                    <div class="form-control-plaintext" id="abandordesamp"></div>
                                 </div>
                             </div>
                         </div>
@@ -1190,11 +970,13 @@
                             <div class="form-group">
                                 <label class="col-12">Consumo de alcohol y/o drogas</label>
                                 <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="consalcdro"></div>
+                                    <div class="form-control-plaintext" id="alcoholordrogas"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row" id="otrotipvl">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-12">Otro</label>
                                 <div class="col-md-9">
@@ -1268,5 +1050,7 @@
     </div>
 </div>
 <!-- END From Left Modal -->
+
+
 
 <script src="pages/scripts/registros.js"></script>

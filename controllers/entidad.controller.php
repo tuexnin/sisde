@@ -13,18 +13,37 @@ $entidad = isset($_POST['txtEntidad']) ? $_POST['txtEntidad'] : "";
 $ruc = isset($_POST['txtRuc']) ? $_POST['txtRuc'] : "";
 $direccion = isset($_POST['txtDireccion']) ? $_POST['txtDireccion'] : "";
 $telefono = isset($_POST['txtTelefono']) ? $_POST['txtTelefono'] : "";
+$anexo = isset($_POST['txtAnexo']) ? $_POST['txtAnexo'] : "";
 $celular = isset($_POST['txtCelular']) ? $_POST['txtCelular'] : "";
 $correo = isset($_POST['txtCorreo']) ? $_POST['txtCorreo'] : "";
+$nombre_responsable = isset($_POST['txtNomRespon']) ? $_POST['txtNomRespon'] : "";
+$apellidos_responsable = isset($_POST['txtApeRespon']) ? $_POST['txtApeRespon'] : "";
+$unidad = isset($_POST['txtUnidad']) ? $_POST['txtUnidad'] : "";
+$ruc_unidad = isset($_POST['txtRucUnidad']) ? $_POST['txtRucUnidad'] : "";
+$direccion_unidad = isset($_POST['txtDireccionUnidad']) ? $_POST['txtDireccionUnidad'] : "";
+$telefono_unidad = isset($_POST['txtTelefonoUnidad']) ? $_POST['txtTelefonoUnidad'] : "";
+$anexo_unidad = isset($_POST['txtAnexoUnidad']) ? $_POST['txtAnexoUnidad'] : "";
+$celular_unidad = isset($_POST['txtCelularUnidad']) ? $_POST['txtCelularUnidad'] : "";
+$correo_unidad = isset($_POST['txtCorreoUnidad']) ? $_POST['txtCorreoUnidad'] : "";
+$ape_resp_unidad = isset($_POST['txtApeRespUnidad']) ? $_POST['txtApeRespUnidad'] : "";
+$nom_resp_unidad = isset($_POST['txtNomRespUnidad']) ? $_POST['txtNomRespUnidad'] : "";
+$institucion = isset($_POST['txtInstitucion']) ? $_POST['txtInstitucion'] : "";
+$ruc_institucion = isset($_POST['txtRucInstitucion']) ? $_POST['txtRucInstitucion'] : "";
+$direccion_institucion = isset($_POST['txtDirecInstitucion']) ? $_POST['txtDirecInstitucion'] : "";
+$telefono_institucion = isset($_POST['txtTelInstitucion']) ? $_POST['txtTelInstitucion'] : "";
+$anexo_institucion = isset($_POST['txtAnexInstitucion']) ? $_POST['txtAnexInstitucion'] : "";
+$celular_institucion = isset($_POST['txtCelInstitucion']) ? $_POST['txtCelInstitucion'] : "";
+$correo_institucion = isset($_POST['txtCorreoInstitucion']) ? $_POST['txtCorreoInstitucion'] : "";
 
 
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         if (empty($identidad)) {
-            $rspta = $EntidadModel::insertar($entidad, $ruc, $direccion, $telefono, $celular, $correo, $iddistrito);
+            $rspta = $EntidadModel::insertar($entidad, $ruc, $direccion, $telefono, $anexo, $celular, $correo, $iddistrito, $nombre_responsable, $apellidos_responsable, $unidad, $ruc_unidad, $direccion_unidad, $telefono_unidad, $anexo_unidad, $celular_unidad, $correo_unidad, $ape_resp_unidad, $nom_resp_unidad, $institucion, $ruc_institucion, $direccion_institucion, $telefono_institucion, $anexo_institucion, $celular_institucion, $correo_institucion);
             echo $rspta ? "Entidad Agregada" : "Entidad no se pudo Agregar";
         } else {
-            $rspta = $EntidadModel::editar($identidad, $entidad, $ruc, $direccion, $telefono, $celular, $correo);
+            $rspta = $EntidadModel::editar($identidad, $entidad, $ruc, $direccion, $telefono, $anexo, $celular, $correo, $iddistrito, $nombre_responsable, $apellidos_responsable, $unidad, $ruc_unidad, $direccion_unidad, $telefono_unidad, $anexo_unidad, $celular_unidad, $correo_unidad, $ape_resp_unidad, $nom_resp_unidad, $institucion, $ruc_institucion, $direccion_institucion, $telefono_institucion, $anexo_institucion, $celular_institucion, $correo_institucion);
             echo $rspta ? "Entidad actualizada" : "Entidad no se pudo actualizar";
         }
         break;
@@ -96,7 +115,7 @@ switch ($_GET["op"]) {
         $rspt = $EntidadModel::getEntidad($iddistrito);
         echo "<option value=''>Seleccione</option>";
         foreach ($rspt as $result) {
-            echo "<option value='$result->identidad'>$result->entidad</option>";
+            echo "<option value='$result->identidad'>$result->institucion</option>";
         }
         break;
 }

@@ -50,7 +50,7 @@
                 <div class="block-content">
                     <form method="post" id="formulario" name="formulario">
                         <div class="form-group row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <div class="form-material">
                                     <input type="hidden" id="txtIdusuario" name="txtIdusuario">
                                     <input type="hidden" name="txtContraseña" id="txtContraseña">
@@ -58,13 +58,13 @@
                                     <label for="txtDni">DNI</label>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-material">
                                     <input type="text" class="form-control" id="txtNombres" name="txtNombres" placeholder="Ingrese sus nombres">
                                     <label for="txtNombres">Nombres</label>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-material">
                                     <input type="text" class="form-control" id="txtApellidos" name="txtApellidos" placeholder="Ingrese sus apellidos">
                                     <label for="txtApellidos">Apellidos</label>
@@ -74,10 +74,38 @@
                         <div class="form-group row">
                             <div class="col-md-4">
                                 <div class="form-material">
+                                    <input type="text" class="form-control" id="txtCelular" name="txtCelular" placeholder="Ingrese su celular">
+                                    <label for="txtCelular">Celular</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-material">
+                                    <input type="text" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Ingrese su correo">
+                                    <label for="txtCorreo">Correo</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-material">
+                                    <input type="text" class="form-control" id="txtProfesion" name="txtProfesion" placeholder="Ingrese su profesion">
+                                    <label for="txtProfesion">Profesion</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <div class="form-material">
+                                    <input type="text" class="form-control" id="txtCargo" name="txtCargo" placeholder="Ingrese su cargo">
+                                    <label for="txtCargo">Cargo</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-material">
                                     <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="********">
                                     <label for="txtPassword">Contraseña</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-md-4" id="tipouser">
                                 <div class="form-material">
                                     <select class="form-control" id="txtTipo" name="txtTipo" style="width: 100%;">
@@ -153,7 +181,7 @@
                                 <div class="form-material">
                                     <select class="form-control" id="txtidentidad" name="txtidentidad" style="width: 100%;">
                                     </select>
-                                    <label for="txtidentidad">Entidad</label>
+                                    <label for="txtidentidad">Institucion</label>
                                 </div>
                             </div>
                         </div>

@@ -37,13 +37,17 @@ class UsuariosModel{
         return Connection::executeQuery($sql);
     }
 
-    static public function insertar($dni, $nombres, $apellidos, $password, $rol, $imagen, $tipo, $ideess, $identidad, $idred){
-        $sql = "INSERT INTO usuario (dni, nombres, apellidos, password, rol, foto, tipo, ideess, identidad, idred) VALUES (:dni, :nombres, :apellidos, :password, :rol, :foto, :tipo, :ideess, :identidad, :idred)";
+    static public function insertar($dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen, $tipo, $ideess, $identidad, $idred){
+        $sql = "INSERT INTO usuario (dni, nombres, apellidos, password, rol, foto, tipo, celular, correo, profesion, cargo, ideess, identidad, idred) VALUES (:dni, :nombres, :apellidos, :password, :rol, :foto, :tipo, :celular, :correo, :profesion, :cargo, :ideess, :identidad, :idred)";
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
         $stmt->bindParam('dni', $dni, PDO::PARAM_STR);
         $stmt->bindParam('nombres', $nombres, PDO::PARAM_STR);
         $stmt->bindParam('apellidos', $apellidos, PDO::PARAM_STR);
+        $stmt->bindParam('celular', $celular, PDO::PARAM_STR);
+        $stmt->bindParam('correo', $correo, PDO::PARAM_STR);
+        $stmt->bindParam('profesion', $profesion, PDO::PARAM_STR);
+        $stmt->bindParam('cargo', $cargo, PDO::PARAM_STR);
         $stmt->bindParam('password', $password, PDO::PARAM_STR);
         $stmt->bindParam('rol', $rol, PDO::PARAM_STR);
         $stmt->bindParam('foto', $imagen, PDO::PARAM_STR);
@@ -54,14 +58,18 @@ class UsuariosModel{
         return $stmt->execute();
     }
 
-    static public function editar($idusuario, $dni, $nombres, $apellidos, $password, $rol, $imagen){
-        $sql = "UPDATE usuario SET dni = :dni, nombres = :nombres, apellidos = :apellidos, password = :password, rol = :rol, foto = :foto WHERE idusuario = :idusuario";
+    static public function editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen){
+        $sql = "UPDATE usuario SET dni = :dni, nombres = :nombres, apellidos = :apellidos, celular = :celular, correo = :correo, profesion = :profesion, cargo = :cargo, password = :password, rol = :rol, foto = :foto WHERE idusuario = :idusuario";
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
         $stmt->bindParam('idusuario', $idusuario, PDO::PARAM_STR);
         $stmt->bindParam('dni', $dni, PDO::PARAM_STR);
         $stmt->bindParam('nombres', $nombres, PDO::PARAM_STR);
         $stmt->bindParam('apellidos', $apellidos, PDO::PARAM_STR);
+        $stmt->bindParam('celular', $celular, PDO::PARAM_STR);
+        $stmt->bindParam('correo', $correo, PDO::PARAM_STR);
+        $stmt->bindParam('profesion', $profesion, PDO::PARAM_STR);
+        $stmt->bindParam('cargo', $cargo, PDO::PARAM_STR);
         $stmt->bindParam('password', $password, PDO::PARAM_STR);
         $stmt->bindParam('rol', $rol, PDO::PARAM_STR);
         $stmt->bindParam('foto', $imagen, PDO::PARAM_STR);

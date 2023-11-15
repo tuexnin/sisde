@@ -9,14 +9,30 @@ function init() {
     $("#contentUbigeo").hide();
     $("#contentEntidad").hide();
 
-    $("#txtDepartamento").select2();
-    $("#txtProvincia").select2();
-    $("#txtDistrito").select2();
-    $("#txtidentidad").select2();
+    $("#txtDepartamento").select2({
+        dropdownParent: $("#modalUsuario")
+    });
+    $("#txtProvincia").select2({
+        dropdownParent: $("#modalUsuario")
+    });
+    $("#txtDistrito").select2({
+        dropdownParent: $("#modalUsuario")
+    });
+    $("#txtidentidad").select2({
+        dropdownParent: $("#modalUsuario")
+    });
     $("#txtidred1").select2();
     $("#txtidred").select2();
     $("#txtidmicrored").select2();
     $("#txtideess").select2();
+
+    validarNumeros("#txtDni", 8);
+    validarNumeros("#txtCelular", 9);
+    validarEntradaTexto("#txtNombres", 55);
+    validarEntradaTexto("#txtApellidos", 55);
+    validarEntradaTexto("#txtProfesion", 55);
+    validarEntradaTexto("#txtCargo", 55);
+    validarEntradaEmail("#txtCorreo", 55);
 
     selectRol();
     selectTipo();
@@ -75,6 +91,85 @@ function init() {
 
     $("#formulario").on("submit", function (e) {
         guardaryeditar(e);
+    });
+}
+
+
+function validarNumeros(campo, cant) {
+    $(campo).on("input", function () {
+        var valor = $(this).val();
+        var regex = /^[0-9]{0,cant}$/;
+        if (!regex.test(valor)) {
+            valor = valor.replace(/[^0-9]/g, "").substring(0, cant);
+            $(this).val(valor);
+        }
+    });
+}
+
+function validarEntradaTexto(campo, cant) {
+    $(campo).on("input", function () {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+    }).on("keydown keyup", function (e) {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+        if (e.type === "keydown") {
+            if (e.key.match(/^[a-z]$/i) && $(this).val().length >= cant && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            } else if (!e.key.match(/^[a-z]$/i) && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            }
+        } else if (e.type === "keyup") {
+            if (!$(this).val().match(/^[A-Z ]{0,cant}$/)) {
+                var valorActual = $(this).val().toUpperCase();
+                var valorNuevo = valorActual.replace(/[^A-Z ]/g, '').substring(0, cant);
+                $(this).val(valorNuevo);
+            }
+        }
+    });
+}
+
+function validarEntradaEmail(campo, cant) {
+    $(campo).on("input", function () {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+    }).on("keydown keyup", function (e) {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+        if (e.type === "keydown") {
+            if (e.key.match(/^[a-zA-Z0-9@.]$/) && $(this).val().length >= cant && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            } else if (!e.key.match(/^[a-zA-Z0-9@.]$/) && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            }
+        } else if (e.type === "keyup") {
+            if (!$(this).val().match(/^[A-Z0-9@. ]{0,cant}$/)) {
+                var valorActual = $(this).val().toUpperCase();
+                var valorNuevo = valorActual.replace(/[^A-Z0-9@. ]/g, '').substring(0, cant);
+                $(this).val(valorNuevo);
+            }
+        }
+    });
+}
+
+function validarEntradaTextoNumeros(campo, cant) {
+    $(campo).on("input", function () {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+    }).on("keydown keyup", function (e) {
+        if (e.type === "keydown") {
+            if (e.key.match(/^[a-zA-Z0-9 ]$/) && $(this).val().length >= cant && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            } else if (!e.key.match(/^[a-zA-Z0-9 ]$/) && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            }
+        } else if (e.type === "keyup") {
+            if (!$(this).val().match(/^[A-Z0-9 ]{0,cant}$/)) {
+                var valorActual = $(this).val().toUpperCase();
+                var valorNuevo = valorActual.replace(/[^A-Z0-9 ]/g, '').substring(0, cant);
+                $(this).val(valorNuevo);
+            }
+        }
     });
 }
 
@@ -223,6 +318,10 @@ function mostrar(idusuario) {
             $("#txtDni").val(data[0]["dni"]);
             $("#txtNombres").val(data[0]["nombres"]);
             $("#txtApellidos").val(data[0]["apellidos"]);
+            $("#txtCelular").val(data[0]["celular"]);
+            $("#txtCorreo").val(data[0]["correo"]);
+            $("#txtProfesion").val(data[0]["profesion"]);
+            $("#txtCargo").val(data[0]["cargo"]);
             $("#txtPassword").val(data[0][""]);
             $("#txtTipo").val(data[0]["tipo"])
             $("#imagenmuestra").attr("src", data[0]["foto"] == null || data[0]["foto"] == "" ? "" : "files/fotos/" + data[0]["foto"]);
@@ -235,18 +334,14 @@ function mostrar(idusuario) {
 
 function limpiar() {
     $("#txtIdusuario").val("");
-    $("#txtEntidad").val("");
-    $("#txtEess").val("");
-    $("#txtRuc").val("");
-    $("#txtDireccion").val("");
-    $("#txtTelefono").val("");
-    $("#txtCelular").val("");
-    $("#txtCorreo").val("");
     $("#txtContraseña").val("");
-    $("#txtDistrito").val("");
     $("#txtDni").val("");
     $("#txtNombres").val("");
     $("#txtApellidos").val("");
+    $("#txtCelular").val("");
+    $("#txtCorreo").val("");
+    $("#txtProfesion").val("");
+    $("#txtCargo").val("");
     $("#txtPassword").val("");
     $("#tituloModal").text("Agregar Usuario");
     $("#imagenmuestra").attr("src", "");

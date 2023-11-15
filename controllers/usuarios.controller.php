@@ -10,6 +10,10 @@ $contraseña = isset($_POST['txtContraseña']) ? $_POST['txtContraseña'] : "";
 $dni = isset($_POST['txtDni']) ? $_POST['txtDni'] : "";
 $nombres = isset($_POST['txtNombres']) ? $_POST['txtNombres'] : "";
 $apellidos = isset($_POST['txtApellidos']) ? $_POST['txtApellidos'] : "";
+$celular = isset($_POST['txtCelular']) ? $_POST['txtCelular'] : "";
+$correo = isset($_POST['txtCorreo']) ? $_POST['txtCorreo'] : "";
+$profesion = isset($_POST['txtProfesion']) ? $_POST['txtProfesion'] : "";
+$cargo = isset($_POST['txtCargo']) ? $_POST['txtCargo'] : "";
 $clave = isset($_POST['txtPassword']) ? $_POST['txtPassword'] : "";
 $tipo = isset($_POST['txtTipo']) ? $_POST['txtTipo'] : "";
 $rol = isset($_POST['txtRol']) ? $_POST['txtRol'] : "";
@@ -42,13 +46,13 @@ switch ($_GET["op"]) {
                     }
                     $password = hash('md5', $clave);
                     if (empty($idusuario)) {
-                        $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
+                        $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
                         echo $rspta ? "Usuario registrado" : "Usuario no se pudo registrar";
                     } else {
                         if (!empty($clave)) {
-                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $password, $rol, $imagen);
+                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen);
                         } else {
-                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $contraseña, $rol, $imagen);
+                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $contraseña, $rol, $imagen);
                         }
                         echo $rspta ? "Usuario actualizada" : "Usuario no se pudo actualizar";
                     }
@@ -74,13 +78,13 @@ switch ($_GET["op"]) {
                     }
                     $password = hash('md5', $clave);
                     if (empty($idusuario)) {
-                        $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
+                        $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
                         echo $rspta ? "Usuario registrado" : "Usuario no se pudo registrar";
                     } else {
                         if (!empty($clave)) {
-                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $password, $rol, $imagen);
+                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen);
                         } else {
-                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $contraseña, $rol, $imagen);
+                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $contraseña, $rol, $imagen);
                         }
                         echo $rspta ? "Usuario actualizada" : "Usuario no se pudo actualizar";
                     }
@@ -106,13 +110,13 @@ switch ($_GET["op"]) {
                     }
                     $password = hash('md5', $clave);
                     if (empty($idusuario)) {
-                        $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
+                        $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
                         echo $rspta ? "Usuario registrado" : "Usuario no se pudo registrar";
                     } else {
                         if (!empty($clave)) {
-                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $password, $rol, $imagen);
+                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen);
                         } else {
-                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $contraseña, $rol, $imagen);
+                            $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $contraseña, $rol, $imagen);
                         }
                         echo $rspta ? "Usuario actualizada" : "Usuario no se pudo actualizar";
                     }
@@ -133,13 +137,13 @@ switch ($_GET["op"]) {
             }
             $password = hash('md5', $clave);
             if (empty($idusuario)) {
-                $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
+                $rspta = $UsuariosModel::insertar($dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen, $tipo, empty($ideess) ? null : $ideess, empty($identidad) ? null : $identidad, empty($idred) ? null : $idred);
                 echo $rspta ? "Usuario registrado" : "Usuario no se pudo registrar";
             } else {
                 if (!empty($clave)) {
-                    $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $password, $rol, $imagen);
+                    $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $password, $rol, $imagen);
                 } else {
-                    $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $contraseña, $rol, $imagen);
+                    $rspta = $UsuariosModel::editar($idusuario, $dni, $nombres, $apellidos, $celular, $correo, $profesion, $cargo, $contraseña, $rol, $imagen);
                 }
                 echo $rspta ? "Usuario actualizada" : "Usuario no se pudo actualizar";
             }

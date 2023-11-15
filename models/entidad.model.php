@@ -13,22 +13,41 @@ class EntidadModel{
         return Connection::executeQuery($sql);
     }
 
-    static public function insertar($entidad, $ruc, $direccion, $telefono, $celular, $correo, $iddistrito){
-        $sql = "INSERT INTO entidad (entidad, ruc, direccion, telefono, celular, correo, iddistrito) VALUES (:entidad, :ruc, :direccion, :telefono, :celular, :correo, :iddistrito)";
+    static public function insertar($entidad, $ruc, $direccion, $telefono, $anexo, $celular, $correo, $iddistrito, $nombre_responsable, $apellidos_responsable, $unidad, $ruc_unidad, $direccion_unidad, $telefono_unidad, $anexo_unidad, $celular_unidad, $correo_unidad, $ape_resp_unidad, $nom_resp_unidad, $institucion, $ruc_institucion, $direccion_institucion, $telefono_institucion, $anexo_institucion, $celular_institucion, $correo_institucion){
+        $sql = "INSERT INTO entidad (entidad, ruc, direccion, telefono, anexo, celular, correo, iddistrito, nombre_responsable, apellidos_responsable, unidad, ruc_unidad, direccion_unidad, telefono_unidad, anexo_unidad, celular_unidad, correo_unidad, apellido_resp_unidad, nombres_resp_unidad, institucion, ruc_institucion, direccion_institucion, telefono_institucion, anexo_institucion, celular_institucion, correo_institucion) VALUES (:entidad, :ruc, :direccion, :telefono, :anexo, :celular, :correo, :iddistrito, :nombre_responsable, :apellidos_responsable, :unidad, :ruc_unidad, :direccion_unidad, :telefono_unidad, :anexo_unidad, :celular_unidad, :correo_unidad, :apellido_resp_unidad, :nombres_resp_unidad, :institucion, :ruc_institucion, :direccion_institucion, :telefono_institucion, :anexo_institucion, :celular_institucion, :correo_institucion)";
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
         $stmt->bindParam('entidad', $entidad, PDO::PARAM_STR);
         $stmt->bindParam('ruc', $ruc, PDO::PARAM_STR);
         $stmt->bindParam('direccion', $direccion, PDO::PARAM_STR);
         $stmt->bindParam('telefono', $telefono, PDO::PARAM_STR);
+        $stmt->bindParam('anexo', $anexo, PDO::PARAM_STR);
         $stmt->bindParam('celular', $celular, PDO::PARAM_STR);
         $stmt->bindParam('correo', $correo, PDO::PARAM_STR);
         $stmt->bindParam('iddistrito', $iddistrito, PDO::PARAM_STR);
+        $stmt->bindParam('nombre_responsable', $nombre_responsable, PDO::PARAM_STR);
+        $stmt->bindParam('apellidos_responsable', $apellidos_responsable, PDO::PARAM_STR);
+        $stmt->bindParam('unidad', $unidad, PDO::PARAM_STR);
+        $stmt->bindParam('ruc_unidad', $ruc_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('direccion_unidad', $direccion_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('telefono_unidad', $telefono_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('anexo_unidad', $anexo_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('celular_unidad', $celular_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('correo_unidad', $correo_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('apellido_resp_unidad', $ape_resp_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('nombres_resp_unidad', $nom_resp_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('institucion', $institucion, PDO::PARAM_STR);
+        $stmt->bindParam('ruc_institucion', $ruc_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('direccion_institucion', $direccion_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('telefono_institucion', $telefono_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('anexo_institucion', $anexo_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('celular_institucion', $celular_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('correo_institucion', $correo_institucion, PDO::PARAM_STR);
         return $stmt->execute();
     }
 
-    static public function editar($identidad, $entidad, $ruc, $direccion, $telefono, $celular, $correo){
-        $sql = "UPDATE entidad SET entidad = :entidad, ruc = :ruc, direccion = :direccion, telefono = :telefono, celular = :celular, correo = :correo WHERE identidad = :identidad";
+    static public function editar($identidad, $entidad, $ruc, $direccion, $telefono, $anexo, $celular, $correo, $nombre_responsable, $apellidos_responsable, $unidad, $ruc_unidad, $direccion_unidad, $telefono_unidad, $anexo_unidad, $celular_unidad, $correo_unidad, $ape_resp_unidad, $nom_resp_unidad, $institucion, $ruc_institucion, $direccion_institucion, $telefono_institucion, $anexo_institucion, $celular_institucion, $correo_institucion){
+        $sql = "UPDATE entidad SET entidad = :entidad, ruc = :ruc, direccion = :direccion, telefono = :telefono, anexo = :anexo, celular = :celular, correo = :correo, nombre_responsable = :nombre_responsable, apellidos_responsable = :apellidos_responsable, unidad = :unidad, ruc_unidad = :ruc_unidad, direccion_unidad = :direccion_unidad, telefono_unidad = :telefono_unidad, anexo_unidad = :anexo_unidad, celular_unidad = :celular_unidad, correo_unidad = :correo_unidad, apellido_resp_unidad = :apellido_resp_unidad, nombres_resp_unidad = :nombres_resp_unidad, institucion = :institucion, ruc_institucion = :ruc_institucion, direccion_institucion = :direccion_institucion, telefono_institucion = :telefono_institucion, anexo_institucion = :anexo_institucion, celular_institucion = :celular_institucion, correo_institucion = :correo_institucion WHERE identidad = :identidad";
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
         $stmt->bindParam('identidad', $identidad, PDO::PARAM_STR);
@@ -36,9 +55,27 @@ class EntidadModel{
         $stmt->bindParam('ruc', $ruc, PDO::PARAM_STR);
         $stmt->bindParam('direccion', $direccion, PDO::PARAM_STR);
         $stmt->bindParam('telefono', $telefono, PDO::PARAM_STR);
+        $stmt->bindParam('anexo', $anexo, PDO::PARAM_STR);
         $stmt->bindParam('celular', $celular, PDO::PARAM_STR);
         $stmt->bindParam('correo', $correo, PDO::PARAM_STR);
-
+        $stmt->bindParam('nombre_responsable', $nombre_responsable, PDO::PARAM_STR);
+        $stmt->bindParam('apellidos_responsable', $apellidos_responsable, PDO::PARAM_STR);
+        $stmt->bindParam('unidad', $unidad, PDO::PARAM_STR);
+        $stmt->bindParam('ruc_unidad', $ruc_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('direccion_unidad', $direccion_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('telefono_unidad', $telefono_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('anexo_unidad', $anexo_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('celular_unidad', $celular_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('correo_unidad', $correo_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('apellido_resp_unidad', $ape_resp_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('nombres_resp_unidad', $nom_resp_unidad, PDO::PARAM_STR);
+        $stmt->bindParam('institucion', $institucion, PDO::PARAM_STR);
+        $stmt->bindParam('ruc_institucion', $ruc_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('direccion_institucion', $direccion_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('telefono_institucion', $telefono_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('anexo_institucion', $anexo_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('celular_institucion', $celular_institucion, PDO::PARAM_STR);
+        $stmt->bindParam('correo_institucion', $correo_institucion, PDO::PARAM_STR);
         return $stmt->execute();
     }
 

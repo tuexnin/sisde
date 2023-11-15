@@ -10,18 +10,7 @@ $UploadModel = new UploadModel();
 
 date_default_timezone_set('America/Lima');
 $idregistro = isset($_POST['txtIdregistro']) ? $_POST['txtIdregistro'] : "";
-$nombreProf = isset($_POST['txtNombreProf']) ? $_POST['txtNombreProf'] : "";
-$CargoProf = isset($_POST['txtCargoProf']) ? $_POST['txtCargoProf'] : "";
-$TelefonoProf = isset($_POST['txtTelefonoProf']) ? $_POST['txtTelefonoProf'] : "";
-$CorreoProf = isset($_POST['txtCorreoProf']) ? $_POST['txtCorreoProf'] : "";
 $FecDerivacion = isset($_POST['txtFecDerivacion']) ? $_POST['txtFecDerivacion'] : "";
-$FamiliaCon = isset($_POST['txtFamiliaCon']) ? $_POST['txtFamiliaCon'] : "";
-$UnidadEjec = isset($_POST['txtUnidadEjec']) ? $_POST['txtUnidadEjec'] : "";
-$JefeEst = isset($_POST['txtJefeEst']) ? $_POST['txtJefeEst'] : "";
-$DireccionEst = isset($_POST['txtDireccionEst']) ? $_POST['txtDireccionEst'] : "";
-$TelefonoInst = isset($_POST['txtTelefonoInst']) ? $_POST['txtTelefonoInst'] : "";
-$CelularEst = isset($_POST['txtCelularEst']) ? $_POST['txtCelularEst'] : "";
-$CorreoInst = isset($_POST['txtCorreoInst']) ? $_POST['txtCorreoInst'] : "";
 $Ap_nom_us = isset($_POST['txtAp_nom_us']) ? $_POST['txtAp_nom_us'] : "";
 $Fecha_nas = isset($_POST['txtFecha_nas']) ? $_POST['txtFecha_nas'] : "";
 $EdadUs = isset($_POST['txtEdadUs']) ? $_POST['txtEdadUs'] : "";
@@ -45,15 +34,9 @@ $DomicilioActTu = isset($_POST['txtDomicilioActTu']) ? $_POST['txtDomicilioActTu
 $TelefonoFijoTu = isset($_POST['txtTelefonoFijoTu']) ? $_POST['txtTelefonoFijoTu'] : "";
 $CelularTu = isset($_POST['txtCelularTu']) ? $_POST['txtCelularTu'] : "";
 $TipoVulDer = isset($_POST['txtTipoVulDer']) ? $_POST['txtTipoVulDer'] : "";
-$MaltratoInf = isset($_POST['txtMaltratoInf']) ? $_POST['txtMaltratoInf'] : "";
-$MaltratoFisi = isset($_POST['txtMaltratoFisi']) ? $_POST['txtMaltratoFisi'] : "";
-$DesercionEsco = isset($_POST['txtDesercionEsco']) ? $_POST['txtDesercionEsco'] : "";
-$AcosoEsco = isset($_POST['txtAcosoEsco']) ? $_POST['txtAcosoEsco'] : "";
-$ViolenciaSexu = isset($_POST['txtViolenciaSexu']) ? $_POST['txtViolenciaSexu'] : "";
-$ViolenciaFami = isset($_POST['txtViolenciaFami']) ? $_POST['txtViolenciaFami'] : "";
-$ViolenciaGene = isset($_POST['txtViolenciaGene']) ? $_POST['txtViolenciaGene'] : "";
-$AbandonoDesamp = isset($_POST['txtAbandonoDesamp']) ? $_POST['txtAbandonoDesamp'] : "";
-$Consumo = isset($_POST['txtConsumo']) ? $_POST['txtConsumo'] : "";
+$ViolenciaC = isset($_POST['txtViolenciaC']) ? $_POST['txtViolenciaC'] : "";
+$AbandonoDesamp = isset($_POST['txtAbandoDesamp']) ? $_POST['txtAbandoDesamp'] : "";
+$Alcohol = isset($_POST['txtAlcohol']) ? $_POST['txtAlcohol'] : "";
 $OtroDesc = isset($_POST['txtOtroDesc']) ? $_POST['txtOtroDesc'] : "";
 $MotivoDer = isset($_POST['txtMotivoDer']) ? $_POST['txtMotivoDer'] : "";
 $DatosRelevant = isset($_POST['txtDatosRelevant']) ? $_POST['txtDatosRelevant'] : "";
@@ -85,7 +68,7 @@ switch ($_GET["op"]) {
             echo "Error la red no esta registrada en el sistema, debe ser agredada";
         } else {
             if (empty($idregistro)) {
-                $rspta = $RegistrosModel::insertar($nombreProf, $CargoProf, $TelefonoProf, $CorreoProf, $derivacionF, $FamiliaCon, $UnidadEjec, $JefeEst, $ue, $Ap_nom_us, $fechanas_us, $EdadUs, $SexoUs, $Nacionalidad, $GradoInstruc, $OcupacionUs, $DomicilioDni, $DomicilioAct, $CcppUs, $TelefonoUs, $DniUs, $Ap_nom_tu, $DniTu, $fechanas_tu, $EdadTu, $SexoTu, $NacionalidadTu, $ParentestoTu, $GradoInstrucTu, $OcupacionTu, $DomicilioDniTu, $DomicilioActTu, $TelefonoFijoTu, $CelularTu, $VicAgre, $TipoVulDer, $MaltratoInf, $MaltratoFisi, $DesercionEsco, $AcosoEsco, $ViolenciaSexu, $ViolenciaFami, $ViolenciaGene, $AbandonoDesamp, $Consumo, $OtroDesc, $MotivoDer, $DatosRelevant, $idusuario, $identidad, $fecha_reg, $eessDirecto, $directo);
+                $rspta = $RegistrosModel::insertar($derivacionF, $ue, $Ap_nom_us, $fechanas_us, $EdadUs, $SexoUs, $Nacionalidad, $GradoInstruc, $OcupacionUs, $DomicilioDni, $DomicilioAct, $CcppUs, $TelefonoUs, $DniUs, $Ap_nom_tu, $DniTu, $fechanas_tu, $EdadTu, $SexoTu, $NacionalidadTu, $ParentestoTu, $GradoInstrucTu, $OcupacionTu, $DomicilioDniTu, $DomicilioActTu, $TelefonoFijoTu, $CelularTu, $VicAgre, $TipoVulDer, $ViolenciaC, $AbandonoDesamp, $Alcohol, $OtroDesc, $MotivoDer, $DatosRelevant, $idusuario, $identidad, $fecha_reg, $eessDirecto, $directo);
                 if ($rspta != "error") {
                     $rspta2 = $MovimientosModel::insertar($identidad, null, $rspta, 1, 0, null, null, null);
                     echo $rspta2 ? "Registro Correcto" : "No se pudo Registrar";
@@ -93,7 +76,7 @@ switch ($_GET["op"]) {
                     echo "No se pudo registrar";
                 }
             } else {
-                $rspta = $RegistrosModel::editar($idregistro, $nombreProf, $CargoProf, $TelefonoProf, $CorreoProf, $derivacionF, $FamiliaCon, $UnidadEjec, $JefeEst, $ue, $Ap_nom_us, $fechanas_us, $EdadUs, $SexoUs, $Nacionalidad, $GradoInstruc, $OcupacionUs, $DomicilioDni, $DomicilioAct, $CcppUs, $TelefonoUs, $DniUs, $Ap_nom_tu, $DniTu, $fechanas_tu, $EdadTu, $SexoTu, $NacionalidadTu, $ParentestoTu, $GradoInstrucTu, $OcupacionTu, $DomicilioDniTu, $DomicilioActTu, $TelefonoFijoTu, $CelularTu, $VicAgre, $TipoVulDer, $MaltratoInf, $MaltratoFisi, $DesercionEsco, $AcosoEsco, $ViolenciaSexu, $ViolenciaFami, $ViolenciaGene, $AbandonoDesamp, $Consumo, $OtroDesc, $MotivoDer, $DatosRelevant, $idusuario, $identidad);
+                $rspta = $RegistrosModel::editar($idregistro, $derivacionF, $ue, $Ap_nom_us, $fechanas_us, $EdadUs, $SexoUs, $Nacionalidad, $GradoInstruc, $OcupacionUs, $DomicilioDni, $DomicilioAct, $CcppUs, $TelefonoUs, $DniUs, $Ap_nom_tu, $DniTu, $fechanas_tu, $EdadTu, $SexoTu, $NacionalidadTu, $ParentestoTu, $GradoInstrucTu, $OcupacionTu, $DomicilioDniTu, $DomicilioActTu, $TelefonoFijoTu, $CelularTu, $VicAgre, $TipoVulDer, $ViolenciaC, $AbandonoDesamp, $Alcohol, $OtroDesc, $MotivoDer, $DatosRelevant, $idusuario, $identidad);
                 echo $rspta ? "Registro actualizado" : "No se pudo actualizar";
             }
         }
@@ -132,11 +115,10 @@ switch ($_GET["op"]) {
             $mostrar = $mostrarInfo[$idregistro] ?? false;
             $data[] = array(
                 "0" => $RegistrosModel::validarMenu($result->idmovimiento, $result->tipo_movimiento, $result->idregistro, $result->procesado),
-                "1" => $result->unidad_ejecutora,
-                "2" => $result->fecha_derivacion,
-                "3" => $result->ap_nom_us,
-                "4" => $mostrar ? '<button type="button" class="btn btn-outline-success" onclick="cargarArchivos(' . $idregistro . ')"><i class="fa fa-file-pdf-o"></i></button>' : '<button type="button" class="btn btn-outline-info" onclick="cargarArchivos(' . $idregistro . ')"><i class="fa fa-upload"></i></button>',
-                "5" => '<span class="badge ' . $RegistrosModel::getBadge($result->tipo_movimiento) . '">' . $MovimientosModel::tipoMov($result->tipo_movimiento) . '</span>'
+                "1" => $result->fecha_derivacion,
+                "2" => $result->ap_nom_us,
+                "3" => $mostrar ? '<button type="button" class="btn btn-outline-success" onclick="cargarArchivos(' . $idregistro . ')"><i class="fa fa-file-pdf-o"></i></button>' : '<button type="button" class="btn btn-outline-info" onclick="cargarArchivos(' . $idregistro . ')"><i class="fa fa-upload"></i></button>',
+                "4" => '<span class="badge ' . $RegistrosModel::getBadge($result->tipo_movimiento) . '">' . $MovimientosModel::tipoMov($result->tipo_movimiento) . '</span>'
             );
         }
         $results = array(

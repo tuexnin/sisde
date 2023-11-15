@@ -148,14 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Familia en conocimiento de la derivación</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="famConDer"></div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -175,7 +168,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Jefe de establecimiento</label>
+                                <label class="col-12">Modulo</label>
                                 <div class="col-md-9">
                                     <div class="form-control-plaintext" id="jefEst"></div>
                                 </div>
@@ -270,6 +263,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-12">DNI</label>
+                                <div class="col-md-9">
+                                    <div class="form-control-plaintext" id="dnideriv"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="col-12">Fecha de nacimiento</label>
@@ -494,81 +498,27 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Tipo de vulneración de derecho</label>
+                                <label class="col-12">Tipo de Maltrato</label>
                                 <div class="col-md-9">
                                     <div class="form-control-plaintext" id="tipvulder"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="contentinfi">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Maltrato infantil</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="malinf"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Maltrato fisico</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="malfis"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="contentdeseres">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Deserción escolar</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="deseresc"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Acoso escolar</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="acosesc"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Violencia sexual</label>
+                                <label class="col-12">Tipo de Violencia</label>
                                 <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="violsex"></div>
+                                    <div class="form-control-plaintext" id="violenciado"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-12">Violencia familiar</label>
+                                <label class="col-12">Abandono y/o Desamparo</label>
                                 <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="violfami"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Violencia de genero</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="violgene"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-12">Abandono y/o desamparo</label>
-                                <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="abandesa"></div>
+                                    <div class="form-control-plaintext" id="abandordesamp"></div>
                                 </div>
                             </div>
                         </div>
@@ -578,11 +528,13 @@
                             <div class="form-group">
                                 <label class="col-12">Consumo de alcohol y/o drogas</label>
                                 <div class="col-md-9">
-                                    <div class="form-control-plaintext" id="consalcdro"></div>
+                                    <div class="form-control-plaintext" id="alcoholordrogas"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row" id="otrotipvl">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-12">Otro</label>
                                 <div class="col-md-9">
@@ -640,7 +592,7 @@
                             <div class="block">
                                 <div class="block-content">
                                     <ul class="list list-activity" id="listademov">
-                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -650,7 +602,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-alt-secondary" data-dismiss="modal" id="btnCancelar">Salir</button>
+                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal" id="btnCancelar">Salir</button>
             </div>
         </div>
     </div>

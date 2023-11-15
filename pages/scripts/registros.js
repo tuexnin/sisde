@@ -1,4 +1,5 @@
 var tabla;
+var idmov;
 
 function init() {
     listar();
@@ -18,10 +19,103 @@ function init() {
         }
     });
 
-    validarEntradaTexto("#txtNombreProf", 55);
-    validarEntradaTexto("#txtCargoProf", 55);
-    validarEntradaTexto("#txtFamiliaCon", 55);
-    validarEntradaTexto("#txtJefeEst", 55);
+
+    $("#guardarComoPDF").click(function () {
+
+        $.post(
+            "controllers/ver.controller.php?op=ver",
+            { idmovimiento: $("#txtimpresionnene").val() },
+            function (data) {
+                data = JSON.parse(data);
+
+                // Función para construir el contenido HTML a partir de los datos JSON
+                function buildHTMLFromJSON(data) {
+                    const entry = data[0]; // Tomamos el primer elemento del array
+
+                    return `
+                    <h1>FICHA DE DERIVACION DE CASO</h1>
+                    <h6>IDENTIFICACION DE LA ENTIDAD QUE DERIVA EL CASO</h6>
+                    <p>Nombre del profesional: ${entry.nombre_prof}</p>
+                    <p>Cargo y/o profesión: ${entry.cargo_prof}</p>
+                    <p>Teléfono: ${entry.telefono_prof}</p>
+                    <p>Correo electrónico: ${entry.correo_prof}</p>
+                    <p>Fecha de derivación: ${entry.fecha_derivacion}</p>
+                    <h6>IDENTIFICACION DE LA INSTITUCION DERIVADORA</h6>
+                    <p>Unidad ejecutora: ${entry.unidad_ejecutora}</p>
+                    <p>Modulo: ${entry.unidad}</p>
+                    <p>UE Derivar: ${entry.ue_derivar}</p>
+                    <h6>IDENTIFICACION DEL DERIVADO</h6>
+                    <p>Apellidos y nombres: ${entry.ap_nom_us}</p>
+                    <p>DNI: ${entry.dni_us}</p>
+                    <p>Fecha de nacimiento: ${entry.fecha_nas_us}</p>
+                    <p>Edad: ${entry.edad_us}</p>
+                    <p>Sexo: ${entry.sexo_us}</p>
+                    <p>Nacionalidad: ${entry.nacionalidad_us}</p>
+                    <p>Grado de instrucción: ${entry.grado_instruc_us}</p>
+                    <p>Ocupación: ${entry.ocupacion_us}</p>
+                    <p>Domicilio de DNI: ${entry.domicilio_dni_us}</p>
+                    <p>Domicilio actual: ${entry.domicilio_actual_us}</p>
+                    <p>Teléfono: ${entry.telefono_us}</p>
+                    <h6>IDENTIFICACION DEL ADULTO RESPONSABLE/TUTOR</h6>
+                    <p>Apellidos y nombres: ${entry.ap_nom_tu}</p>
+                    <p>DNI: ${entry.dni_tu}</p>
+                    <p>Fecha de Nacimiento: ${entry.fecha_nac_tu}</p>
+                    <p>Edad: ${entry.edad_tu}</p>
+                    <p>Sexo: ${entry.sexo_tu}</p>
+                    <p>Nacionalidad: ${entry.nacionalidad_tu}</p>
+                    <p>Parentesco: ${entry.parentezco_tu}</p>
+                    <p>Grado de instrucción: ${entry.grado_instuc_tu}</p>
+                    <p>Ocupación: ${entry.ocupacion_tu}</p>
+                    <p>Domicilio de DNI: ${entry.domicilio_dni_tu}</p>
+                    <p>Domicilio actual: ${entry.domicilio_actual_tu}</p>
+                    <p>Teléfono: ${entry.telefono_tu}</p>
+                    <p>Celular: ${entry.celular_tu}</p>
+                    <h6>DESCRIPCION DE LA VULNERACION DEL DERECHO</h6>
+                    <p>Tipo: ${entry.vic_agre}</p>
+                    <p>Tipo de Maltrato: ${entry.tipo_vul_der}</p>
+                    <p>Tipo de Violencia: ${entry.violencia_sexual}</p>
+                    <p>Abandono y/o Desamparo: ${entry.abandono_desamparo}</p>
+                    <p>Consumo de alcohol y/o drogas: ${entry.consumo}</p>
+                    <p>Otro: ${entry.otro_desc}</p>
+                    <h6>DESCRIPCION</h6>
+                    <p>MOTIVO DE DERIVACIÓN: ${entry.motivo_der}</p>
+                    <p>DATOS RELEVANTES A CONSIDERAR: ${entry.datos_relevantes}</p>
+                    `;
+                }
+
+                // Configuración de html2pdf
+                var options = {
+                    margin: 10,
+                    filename: 'contenido.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                var content = buildHTMLFromJSON(data);
+                console.log(content);
+                // Utiliza html2pdf para generar el PDF
+                html2pdf().from(content).set(options).outputPdf().then(function (pdf) {
+                    // Crea un objeto blob desde el PDF
+                    var blob = new Blob([pdf], { type: 'application/pdf' });
+
+                    // Crea una URL para el blob
+                    var url = URL.createObjectURL(blob);
+
+                    // Crea un enlace para descargar el PDF
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'contenido.pdf';
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                });
+            }
+        );
+
+    });
+
     validarEntradaTexto("#txtAp_nom_us", 55);
     validarEntradaTexto("#txtNacionalidad", 55);
     validarEntradaTexto("#txtOcupacionUs", 55);
@@ -29,17 +123,11 @@ function init() {
     validarEntradaTexto("#txtNacionalidadTu", 55);
     validarEntradaTexto("#txtParentestoTu", 55);
     validarEntradaTexto("#txtOcupacionTu", 55);
-    validarEntradaTexto("#txtTipoVulDer", 100);
-    validarEntradaTexto("#txtMaltratoInf", 10);
-    validarEntradaTexto("#txtTipMaltratoFisi", 10);
-    validarEntradaTexto("#txtDesercionEsco", 10);
-    validarEntradaTexto("#txtAcosoEsco", 10);
-    validarEntradaTexto("#txtViolenciaSexu", 10);
-    validarEntradaTexto("#txtViolenciaFami", 10);
-    validarEntradaTexto("#txtViolenciaGene", 10);
-    validarEntradaTexto("#txtAbandonoDesamp", 10);
-    validarEntradaTexto("#txtConsumo", 10);
-    validarEntradaTexto("#txtOtroDesc", 55);
+    validarEntradaTextoNumeros("#txtDomicilioDni", 55);
+    validarEntradaTextoNumeros("#txtDomicilioAct", 55);
+    validarEntradaTextoNumeros("#txtDomicilioDniTu", 55);
+    validarEntradaTextoNumeros("#txtDomicilioActTu", 55);
+    validarEntradaTexto("#txtOtroDesc", 400);
     validarEntradaTexto("#txtMotivoDer", 1000);
     validarEntradaTexto("#txtDatosRelevant", 1000);
     validarNumeros("#txtTelefonoProf", 9);
@@ -52,12 +140,12 @@ function init() {
 
     $("#txtModulo").change(function () {
         console.log($(this).val());
-        if($(this).val() == "P"){
+        if ($(this).val() == "P") {
             $("#txtUnidadEjec").empty();
             $("#txtUnidadEjec").append('<option value="3° Juzgado de Familia Sub-Especializado en violencia">3° Juzgado de Familia Sub-Especializado en violencia</option>');
             $("#txtUnidadEjec").append('<option value="4° Juzgado de Familia Sub-Especializado en violencia">4° Juzgado de Familia Sub-Especializado en violencia</option>');
             $("#txtUnidadEjec").append('<option value="5° Juzgado de Familia Sub-Especializado en violencia">5° Juzgado de Familia Sub-Especializado en violencia</option>');
-        }else if($(this).val() == "SA"){
+        } else if ($(this).val() == "SA") {
             $("#txtUnidadEjec").empty();
             $("#txtUnidadEjec").append('<option value="6° Juzgado de Investigacion Preparatoria">6° Juzgado de Investigacion Preparatoria</option>');
             $("#txtUnidadEjec").append('<option value="7° Juzgado de Investigacion Preparatoria">7° Juzgado de Investigacion Preparatoria</option>');
@@ -74,6 +162,7 @@ function init() {
 
     $("#nombreDocOtro").hide();
     $("#campodirectoderiv").hide();
+    $("#otritodesk").hide();
 
     $("#titulo1").hide();
     $("#datos1").hide();
@@ -95,6 +184,15 @@ function init() {
 
     $('#txtFecDerivacion').datepicker({
         autoclose: true
+    });
+
+    $("#chekito").change(function (e) {
+        if ($(this).is(":checked")) {
+            $("#otritodesk").show();
+            $(window).trigger('resize');
+        } else {
+            $("#otritodesk").hide();
+        }
     });
 
     $("#txtFecha_nas").change(function (e) {
@@ -156,21 +254,21 @@ function init() {
                     { txtUeDerivar: data[0]["RED"] },
                     function (data) {
                         data = JSON.parse(data);
-                        selectMicrored("#microredElect",data[0]["idred"]);
+                        selectMicrored("#microredElect", data[0]["idred"]);
                     }
                 );
             }
         );
     });
 
-    $("#microredElect").change(function (e) { 
+    $("#microredElect").change(function (e) {
         selectEess("#eessDirecto", $(this).val());
     });
 
     $("#directo").change(function (e) {
-        if($(this).val() == 1){
+        if ($(this).val() == 1) {
             $("#campodirectoderiv").show();
-        }else{
+        } else {
             $("#campodirectoderiv").hide();
         }
         $(window).trigger('resize');
@@ -314,6 +412,50 @@ function validarEntradaTexto(campo, cant) {
     });
 }
 
+function validarEntradaEmail(campo, cant) {
+    $(campo).on("input", function () {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+    }).on("keydown keyup", function (e) {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+        if (e.type === "keydown") {
+            if (e.key.match(/^[a-zA-Z0-9@.]$/) && $(this).val().length >= cant && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            } else if (!e.key.match(/^[a-zA-Z0-9@.]$/) && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            }
+        } else if (e.type === "keyup") {
+            if (!$(this).val().match(/^[A-Z0-9@. ]{0,cant}$/)) {
+                var valorActual = $(this).val().toUpperCase();
+                var valorNuevo = valorActual.replace(/[^A-Z0-9@. ]/g, '').substring(0, cant);
+                $(this).val(valorNuevo);
+            }
+        }
+    });
+}
+
+function validarEntradaTextoNumeros(campo, cant) {
+    $(campo).on("input", function () {
+        var valor = $(this).val().toUpperCase();
+        $(this).val(valor);
+    }).on("keydown keyup", function (e) {
+        if (e.type === "keydown") {
+            if (e.key.match(/^[a-zA-Z0-9 ]$/) && $(this).val().length >= cant && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            } else if (!e.key.match(/^[a-zA-Z0-9 ]$/) && e.keyCode !== 8 && e.keyCode !== 32 && e.keyCode !== 9) {
+                e.preventDefault();
+            }
+        } else if (e.type === "keyup") {
+            if (!$(this).val().match(/^[A-Z0-9 ]{0,cant}$/)) {
+                var valorActual = $(this).val().toUpperCase();
+                var valorNuevo = valorActual.replace(/[^A-Z0-9 ]/g, '').substring(0, cant);
+                $(this).val(valorNuevo);
+            }
+        }
+    });
+}
+
 function selectRed(campo) {
     $.post(
         "controllers/red.controller.php?op=selectRed",
@@ -411,7 +553,7 @@ function traerArchivos(idregistro) {
                 for (x of datos) {
                     let docdoc = x.nombre.trim() != '' ? x.nombre : x.doc;
                     $(".wrapper_files").append(
-                        '<a class="d-block btn btn-light btn-sm mt-2" href="upload/'+ x.ruta +'" download>Descargar: ' + docdoc + '</a>'
+                        '<a class="d-block btn btn-light btn-sm mt-2" href="upload/' + x.ruta + '" download>Descargar: ' + docdoc + '</a>'
                     );
                 }
             }
@@ -603,16 +745,46 @@ function mostrar(idregistro) {
             data = JSON.parse(data);
 
             $("#modalRegistro").modal("show");
+            if (data[0]["edad_us"] < 18) {
+                $("#titulo1").show();
+                $("#datos1").show();
+                $("#datos2").show();
+                $("#datos3").show();
+                $("#datos4").show();
+                $("#campo1").show();
+                $("#campo2").show();
+                $("#campo3").show();
+                $("#campo4").show();
+                $(window).trigger('resize');
+            } else {
+                $("#titulo1").hide();
+                $("#datos1").hide();
+                $("#datos2").hide();
+                $("#datos3").hide();
+                $("#datos4").hide();
+                $("#campo1").hide();
+                $("#campo2").hide();
+                $("#campo3").hide();
+                $("#campo4").hide();
+                $(window).trigger('resize');
+            }
+            if (data[0]["otro_desc"].length > 2) {
+                $("#otritodesk").show();
+                $(window).trigger('resize');
+            } else {
+                $("#otritodesk").hide();
+                $(window).trigger('resize');
+            }
 
             $("#txtIdregistro").val(data[0]["idregistro"]);
-            $("#txtNombreProf").val(data[0]["nombre_prof"]);
-            $("#txtCargoProf").val(data[0]["cargo_prof"]);
-            $("#txtTelefonoProf").val(data[0]["telefono_prof"]);
-            $("#txtCorreoProf").val(data[0]["correo_prof"]);
+            //$("#txtNombreProf").val(data[0]["nombre_prof"]);
+            //$("#txtCargoProf").val(data[0]["cargo_prof"]);
+            //$("#txtTelefonoProf").val(data[0]["telefono_prof"]);
+            //$("#txtCorreoProf").val(data[0]["correo_prof"]);
             $("#txtFecDerivacion").val(data[0]["fecha_derivacion"]);
-            $("#txtFamiliaCon").val(data[0]["familia_con"]);
-            $("#txtUnidadEjec").val(data[0]["unidad_ejecutora"]);
-            $("#txtJefeEst").val(data[0]["jefe_es"]);
+            //$("#txtFamiliaCon").val(data[0]["familia_con"]);
+            //$("#txtUnidadEjec").val(data[0]["unidad_ejecutora"]);
+            //$("#txtJefeEst").val(data[0]["jefe_es"]);
             $("#txtAp_nom_us").val(data[0]["ap_nom_us"]);
             $("#txtFecha_nas").val(data[0]["fecha_nas_us"]);
             $("#txtEdadUs").val(data[0]["edad_us"]);
@@ -636,15 +808,15 @@ function mostrar(idregistro) {
             $("#txtTelefonoFijoTu").val(data[0]["telefono_tu"]);
             $("#txtCelularTu").val(data[0]["celular_tu"]);
             $("#txtTipoVulDer").val(data[0]["tipo_vul_der"]);
-            $("#txtMaltratoInf").val(data[0]["maltrato_infantil"]);
-            $("#txtMaltratoFisi").val(data[0]["maltrato_fisico"]);
-            $("#txtDesercionEsco").val(data[0]["desercion_escolar"]);
-            $("#txtAcosoEsco").val(data[0]["acoso_escolar"]);
-            $("#txtViolenciaSexu").val(data[0]["violencia_sexual"]);
-            $("#txtViolenciaFami").val(data[0]["violencia_familiar"]);
-            $("#txtViolenciaGene").val(data[0]["violencia_genero"]);
-            $("#txtAbandonoDesamp").val(data[0]["abandono_desamparo"]);
-            $("#txtConsumo").val(data[0]["consumo"]);
+            $("#txtViolenciaC").val(data[0]["violencia_sexual"]);
+            $("#txtAbandoDesamp").val(data[0]["abandono_desamparo"]);
+            $("#txtAlcohol").val(data[0]["consumo"]);
+            //$("#txtAcosoEsco").val(data[0]["acoso_escolar"]);
+            //$("#txtViolenciaSexu").val(data[0]["violencia_sexual"]);
+            //$("#txtViolenciaFami").val(data[0]["violencia_familiar"]);
+            //$("#txtViolenciaGene").val(data[0]["violencia_genero"]);
+            //$("#txtAbandonoDesamp").val(data[0]["abandono_desamparo"]);
+            //$("#txtConsumo").val(data[0]["consumo"]);
             $("#txtOtroDesc").val(data[0]["otro_desc"]);
             $("#txtMotivoDer").val(data[0]["motivo_der"]);
             $("#txtDatosRelevant").val(data[0]["datos_relevantes"]);
@@ -655,20 +827,21 @@ function mostrar(idregistro) {
             $("#txtVicAgre").val(data[0]["vic_agre"]);
             $("#txtUeDerivar").val(data[0]["ue_derivar"]);
 
+
         }
     );
 }
 
 function limpiar() {
     $("#txtIdregistro").val("");
-    $("#txtNombreProf").val("");
-    $("#txtCargoProf").val("");
-    $("#txtTelefonoProf").val("");
-    $("#txtCorreoProf").val("");
+    //$("#txtNombreProf").val("");
+    //$("#txtCargoProf").val("");
+    //$("#txtTelefonoProf").val("");
+    //$("#txtCorreoProf").val("");
     $("#txtFecDerivacion").val("");
-    $("#txtFamiliaCon").val("");
-    $("#txtUnidadEjec").val("");
-    $("#txtJefeEst").val("");
+    //$("#txtFamiliaCon").val("");
+    //$("#txtUnidadEjec").val("");
+    //$("#txtJefeEst").val("");
     $("#txtDireccionEst").val("");
     $("#txtTelefonoInst").val("");
     $("#txtCelularEst").val("");
@@ -695,16 +868,16 @@ function limpiar() {
     $("#txtDomicilioActTu").val("");//
     $("#txtTelefonoFijoTu").val("");//
     $("#txtCelularTu").val("");//
-    $("#txtTipoVulDer").val("");//
-    $("#txtMaltratoInf").val("");//
-    $("#txtMaltratoFisi").val("");//
-    $("#txtDesercionEsco").val("");//
-    $("#txtAcosoEsco").val("");//
-    $("#txtViolenciaSexu").val("");//
-    $("#txtViolenciaFami").val("");//
-    $("#txtViolenciaGene").val("");//
-    $("#txtAbandonoDesamp").val("");//
-    $("#txtConsumo").val("");//
+    $("#txtTipoVulDer").val("0").trigger('change');//
+    //$("#txtMaltratoInf").val("");//
+    //$("#txtMaltratoFisi").val("");//
+    //$("#txtDesercionEsco").val("");//
+    //$("#txtAcosoEsco").val("");//
+    //$("#txtViolenciaSexu").val("");//
+    //$("#txtViolenciaFami").val("");//
+    //$("#txtViolenciaGene").val("");//
+    //$("#txtAbandonoDesamp").val("");//
+    //$("#txtConsumo").val("");//
     $("#txtOtroDesc").val("");//
     $("#txtMotivoDer").val("");//
     $("#txtDatosRelevant").val("");//
@@ -713,6 +886,9 @@ function limpiar() {
     $("#txtSexoUs").val("0").trigger('change');//
     $("#txtSexoTu").val("0").trigger('change');//
     $("#txtVicAgre").val("0").trigger('change');
+    $("#txtViolenciaC").val("0").trigger('change');
+    $("#txtAbandoDesamp").val("0").trigger('change');
+    $("#txtAlcohol").val("0").trigger('change');
     selectDepartamento();
     selectProvincia();
     selectDistrito();
@@ -726,6 +902,7 @@ function limpiar() {
     $("#campo2").hide();
     $("#campo3").hide();
     $("#campo4").hide();
+    $("#otritodesk").hide();
 
 }
 
@@ -739,18 +916,7 @@ function guardaryeditar(e) {
         type: "POST",
         data: {
             txtIdregistro: $("#txtIdregistro").val(),
-            txtNombreProf: $("#txtNombreProf").val(),
-            txtCargoProf: $("#txtCargoProf").val(),
-            txtTelefonoProf: $("#txtTelefonoProf").val(),
-            txtCorreoProf: $("#txtCorreoProf").val(),
             txtFecDerivacion: $("#txtFecDerivacion").val(),
-            txtFamiliaCon: $("#txtFamiliaCon").val(),
-            txtUnidadEjec: $("#txtUnidadEjec").val(),
-            txtJefeEst: $("#txtJefeEst").val(),
-            txtDireccionEst: $("#txtDireccionEst").val(),
-            txtTelefonoInst: $("#txtTelefonoInst").val(),
-            txtCelularEst: $("#txtCelularEst").val(),
-            txtCorreoInst: $("#txtCorreoInst").val(),
             txtAp_nom_us: $("#txtAp_nom_us").val(),
             txtFecha_nas: $("#txtFecha_nas").val(),
             txtEdadUs: $("#txtEdadUs").val(),
@@ -774,15 +940,9 @@ function guardaryeditar(e) {
             txtTelefonoFijoTu: $("#txtTelefonoFijoTu").val(),
             txtCelularTu: $("#txtCelularTu").val(),
             txtTipoVulDer: $("#txtTipoVulDer").val(),
-            txtMaltratoInf: $("#txtMaltratoInf").val(),
-            txtMaltratoFisi: $("#txtMaltratoFisi").val(),
-            txtDesercionEsco: $("#txtDesercionEsco").val(),
-            txtAcosoEsco: $("#txtAcosoEsco").val(),
-            txtViolenciaSexu: $("#txtViolenciaSexu").val(),
-            txtViolenciaFami: $("#txtViolenciaFami").val(),
-            txtViolenciaGene: $("#txtViolenciaGene").val(),
-            txtAbandonoDesamp: $("#txtAbandonoDesamp").val(),
-            txtConsumo: $("#txtConsumo").val(),
+            txtViolenciaC: $("#txtViolenciaC").val(),
+            txtAbandoDesamp: $("#txtAbandoDesamp").val(),
+            txtAlcohol: $("#txtAlcohol").val(),
             txtOtroDesc: $("#txtOtroDesc").val(),
             txtMotivoDer: $("#txtMotivoDer").val(),
             txtDatosRelevant: $("#txtDatosRelevant").val(),
@@ -844,7 +1004,7 @@ function onCancel() {
     $("#modalRegistro").modal("hide");
 }
 
-function desifraruederiv(dato){
+function desifraruederiv(dato) {
     $.post(
         "controllers/ver.controller.php?op=uederiv",
         { ue: dato },
@@ -855,21 +1015,23 @@ function desifraruederiv(dato){
     );
 }
 
-function ver(idmovimiento) { 
+function ver(idmovimiento) {
+    $("#txtimpresionnene").val(idmovimiento);
     $("#modalVer").modal("show");
     $.post(
         "controllers/ver.controller.php?op=ver",
         { idmovimiento: idmovimiento },
         function (data) {
             data = JSON.parse(data);
+            console.log(data);
             $("#nombreProf").text(data[0]["nombre_prof"]);
             $("#cargoyoprof").text(data[0]["cargo_prof"]);
             $("#telprof").text(data[0]["telefono_prof"]);
             $("#corrElect").text(data[0]["correo_prof"]);
             $("#fecder").text(data[0]["fecha_derivacion"]);
-            $("#famConDer").text(data[0]["familia_con"]);
+            //$("#famConDer").text(data[0]["familia_con"]);
             $("#uniEjec").text(data[0]["unidad_ejecutora"]);
-            $("#jefEst").text(data[0]["jefe_es"]);
+            $("#jefEst").text(data[0]["unidad"]);
             $("#depart").text(data[0]["departamento"]);
             $("#Provin").text(data[0]["provincia"]);
             $("#distr").text(data[0]["distrito"]);
@@ -904,20 +1066,14 @@ function ver(idmovimiento) {
             $("#celtut").text(data[0]["celular_tu"]);
             $("#vicagre").text(data[0]["vic_agre"]);
             $("#tipvulder").text(data[0]["tipo_vul_der"]);
-            $("#malinf").text(data[0]["maltrato_infantil"]);
-            $("#malfis").text(data[0]["maltrato_fisico"]);
-            $("#deseresc").text(data[0]["desercion_escolar"]);
-            $("#acosesc").text(data[0]["acoso_escolar"]);
-            $("#violsex").text(data[0]["violencia_sexual"]);
-            $("#violfami").text(data[0]["violencia_familiar"]);
-            $("#violgene").text(data[0]["violencia_genero"]);
-            $("#abandesa").text(data[0]["abandono_desamparo"]);
-            $("#consalcdro").text(data[0]["consumo"]);
+            $("#violenciado").text(data[0]["violencia_sexual"]);
+            $("#abandordesamp").text(data[0]["abandono_desamparo"]);
+            $("#alcoholordrogas").text(data[0]["consumo"]);
             $("#otrodesc").text(data[0]["otro_desc"]);
             $("#motder").text(data[0]["motivo_der"]);
             $("#datrelecon").text(data[0]["datos_relevantes"]);
 
-            if (data[0]["edad_us"] > 18){
+            if (data[0]["edad_us"] > 18) {
                 $("#tituloidentuto").hide();
                 $("#contetuto1").hide();
                 $("#contetuto2").hide();
@@ -928,7 +1084,7 @@ function ver(idmovimiento) {
                 $("#contetuto7").hide();
                 $("#contentinfi").hide();
                 $("#contentdeseres").hide();
-            }else{
+            } else {
                 $("#tituloidentuto").show();
                 $("#contetuto1").show();
                 $("#contetuto2").show();
@@ -939,6 +1095,12 @@ function ver(idmovimiento) {
                 $("#contetuto7").show();
                 $("#contentinfi").show();
                 $("#contentdeseres").show();
+            }
+
+            if (data[0]["otro_desc"].length > 1) {
+                $("#otrotipvl").show();
+            } else {
+                $("#otrotipvl").hide();
             }
         }
     );
@@ -954,7 +1116,7 @@ function ver(idmovimiento) {
             for (x of data) {
                 let docdoc = x.nombre.trim() != '' ? x.nombre : x.tipo;
                 $("#docsadjunt").append(
-                    "<div class='col-md-4'><a href='upload/"+x.doc+"' target='_blank'><i class='fa fa-file-text-o'></i> "+docdoc+"</a></div>"
+                    "<div class='col-md-4'><a href='upload/" + x.doc + "' target='_blank'><i class='fa fa-file-text-o'></i> " + docdoc + "</a></div>"
                 );
             }
         }
@@ -967,22 +1129,22 @@ function ver(idmovimiento) {
             data = JSON.parse(data);
             for (x of data) {
                 let registra = "";
-                let destino  = "";
-                if(x.tipo_movimiento == 1 || x.tipo_movimiento == 2 || (x.tipo_movimiento == 3 && x.idderiva == null)){
+                let destino = "";
+                if (x.tipo_movimiento == 1 || x.tipo_movimiento == 2 || (x.tipo_movimiento == 3 && x.idderiva == null)) {
                     registra = x.entidad;
-                    if(x.tipo_movimiento == 2){
+                    if (x.tipo_movimiento == 2) {
                         destino = x.redDes;
-                    }else if(x.tipo_movimiento == 3 && x.idderiva == null){
+                    } else if (x.tipo_movimiento == 3 && x.idderiva == null) {
                         destino = x.establecimiento;
                     }
-                }else if(x.tipo_movimiento == 3){
+                } else if (x.tipo_movimiento == 3) {
                     registra = x.redDer;
                     destino = x.establecimiento;
-                }else if(x.tipo_movimiento == 4){
+                } else if (x.tipo_movimiento == 4) {
                     registra = x.establecimiento;
                 }
                 $("#listademov").append(
-                    "<li><i class='si si-wallet text-success'></i><div class='font-w600'>"+registra+"</div><div><a href='javascript:void(0)'>"+destino+"</a></div><div class='font-size-xs text-muted'>"+ tipMov(x.tipo_movimiento - 1) +"</div></li>"
+                    "<li><i class='si si-wallet text-success'></i><div class='font-w600'>" + registra + "</div><div><a href='javascript:void(0)'>" + destino + "</a></div><div class='font-size-xs text-muted'>" + tipMov(x.tipo_movimiento - 1) + "</div></li>"
                 );
             }
         }
@@ -991,7 +1153,7 @@ function ver(idmovimiento) {
 
 }
 
-function tipMov (dato){
+function tipMov(dato) {
     let tipo = ["Registrado", "Listo", "Derivado", "Atendido"];
     return tipo[dato];
 }
